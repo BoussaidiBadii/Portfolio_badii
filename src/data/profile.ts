@@ -11,7 +11,6 @@ export const profile = {
   phoneHref: "tel:+21653573524",
   linkedin: "https://www.linkedin.com/in/badii-boussaidi/",
   github: "https://github.com/BoussaidiBadii",
-  cv: "/Curriculum_Vitae_Boussaidi_Badii.pdf",
   stats: [
     { value: "3+", label: "Years building" },
     { value: "15+", label: "Projects shipped" },
@@ -21,4 +20,12 @@ export const profile = {
     "JavaScript", "React", "Next.js", "Angular", "Node.js", "Spring Boot", "Symfony",
     "Flutter", "Firebase", "MySQL", "MongoDB", "Docker", "Git", "REST APIs",
   ],
+};
+
+export const seo = {
+  title: "Boussaidi Badii — Full Stack Developer in Tunisia",
+  description:
+    "Boussaidi Badii (Badii Boussaidi) is a Software Engineer and Full Stack Developer in Tunisia building fast Next.js, React and Flutter websites, SaaS platforms and mobile apps.",
+  shareDescription:
+    "Full Stack Developer in Tunisia building fast, polished web & mobile products with Next.js, React and Flutter.",
 };

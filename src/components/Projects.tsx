@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, type PointerEvent } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { categories, projects, type Category, type Project } from "@/data/projects";
 import { GithubIcon, SectionHeading } from "./ui";
 
@@ -13,7 +14,7 @@ function hostOf(url: string) {
   return new URL(url).host.replace(/^www\./, "");
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
+function ProjectCard({ project, index, caseHref }: { project: Project; index: number; caseHref?: string }) {
   // 3D tilt toward the pointer; skipped for touch so scrolling stays smooth.
   const onMove = (e: PointerEvent<HTMLElement>) => {
     if (e.pointerType !== "mouse") return;
@@ -44,9 +45,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         className="glass spotlight group relative flex h-full flex-col overflow-hidden rounded-3xl transition-[transform,border-color] duration-300 ease-out will-change-transform hover:border-ember/40"
       >
         <a
-          href={project.live}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={caseHref ?? project.live}
+          {...(caseHref ? { "aria-label": `${project.name} case study` } : { target: "_blank", rel: "noopener noreferrer" })}
           className={`relative block overflow-hidden border-b border-line ${project.featured ? "aspect-[16/8]" : "aspect-[16/10]"}`}
         >
           <div className="absolute inset-x-0 top-0 z-10 flex items-center gap-1.5 bg-black/60 px-3 py-2 backdrop-blur">
@@ -74,7 +74,13 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-widest text-cyan">{project.category}</p>
-              <h3 className="mt-1 text-2xl font-semibold">{project.name}</h3>
+              <h3 className="mt-1 text-2xl font-semibold">
+                {caseHref ? (
+                  <Link href={caseHref} className="transition hover:text-ember-soft">{project.name}</Link>
+                ) : (
+                  project.name
+                )}
+              </h3>
               <p className="text-sm text-ember-soft">{project.tagline}</p>
             </div>
             <span className="font-mono text-sm text-muted">{String(index + 1).padStart(2, "0")}</span>
@@ -91,13 +97,24 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </ul>
 
           <div className="mt-6 flex gap-2">
+            {caseHref && (
+              <Link
+                href={caseHref}
+                className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-ember/90 px-4 py-2.5 text-sm font-medium text-black transition hover:bg-ember-soft"
+              >
+                Case study <ArrowRight size={16} />
+              </Link>
+            )}
             <a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-white/10 px-4 py-2.5 text-sm font-medium transition hover:bg-ember hover:text-black"
+              aria-label={`${project.name} live site`}
+              className={`inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-sm font-medium transition ${
+                caseHref ? "ring-1 ring-line hover:text-ember-soft hover:ring-ember/50" : "flex-1 bg-white/10 hover:bg-ember hover:text-black"
+              }`}
             >
-              Live site <ArrowUpRight size={16} />
+              {caseHref ? "Live" : "Live site"} <ArrowUpRight size={16} />
             </a>
             <a
               href={project.repo}
@@ -106,7 +123,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               aria-label={`${project.name} source code on GitHub`}
               className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 py-2.5 text-sm ring-1 ring-line transition hover:text-cyan-soft hover:ring-cyan/50"
             >
-              <GithubIcon size={16} /> Code
+              <GithubIcon size={16} />
+              {!caseHref && " Code"}
             </a>
           </div>
         </div>
@@ -115,7 +133,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
-export function Projects() {
+export function Projects({ caseSlugs = [] }: { caseSlugs?: string[] }) {
   const [filter, setFilter] = useState<Filter>("All");
   const shown = filter === "All" ? projects : projects.filter((p) => p.category === filter);
   const filters: Filter[] = ["All", ...categories];
@@ -150,7 +168,7 @@ export function Projects() {
       <motion.ul layout className="grid grid-flow-dense gap-5 md:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {shown.map((p, i) => (
-            <ProjectCard key={p.slug} project={p} index={i} />
+            <ProjectCard key={p.slug} project={p} index={i} caseHref={caseSlugs.includes(p.slug) ? `/work/${p.slug}` : undefined} />
           ))}
         </AnimatePresence>
       </motion.ul>

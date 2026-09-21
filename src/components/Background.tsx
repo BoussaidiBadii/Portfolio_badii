@@ -21,6 +21,8 @@ export function Background() {
     let h = 0;
 
     const resize = () => {
+      // Mobile browsers fire resize while the URL bar collapses; only rebuild on real size changes.
+      if (Math.abs(window.innerWidth - w) < 1 && Math.abs(window.innerHeight - h) < 120) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = window.innerWidth;
       h = window.innerHeight;
@@ -71,7 +73,7 @@ export function Background() {
         ctx.arc(a.x, a.y, 1.4, 0, Math.PI * 2);
         ctx.fill();
       }
-      if (!reduced) raf = requestAnimationFrame(draw);
+      if (!reduced && !document.hidden) raf = requestAnimationFrame(draw);
     };
 
     const onMove = (e: PointerEvent) => {
@@ -80,14 +82,31 @@ export function Background() {
       if (reduced) draw();
     };
 
-    resize();
-    draw();
-    window.addEventListener("resize", resize);
-    window.addEventListener("pointermove", onMove);
+    const onVisibility = () => {
+      cancelAnimationFrame(raf);
+      if (!document.hidden) draw();
+    };
+
+    // Start once the browser is idle so the canvas never competes with first paint and hydration.
+    const start = () => {
+      resize();
+      draw();
+      canvas.style.opacity = "1";
+      window.addEventListener("resize", resize);
+      window.addEventListener("pointermove", onMove);
+      document.addEventListener("visibilitychange", onVisibility);
+    };
+    const idle = window.requestIdleCallback
+      ? window.requestIdleCallback(start, { timeout: 2500 })
+      : window.setTimeout(start, 1200);
+
     return () => {
+      if (window.cancelIdleCallback) window.cancelIdleCallback(idle);
+      else window.clearTimeout(idle);
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onMove);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
@@ -96,7 +115,7 @@ export function Background() {
       <div className="absolute -left-40 top-[-10%] h-[520px] w-[520px] rounded-full bg-ember/20 blur-[140px]" />
       <div className="absolute -right-40 top-[30%] h-[520px] w-[520px] rounded-full bg-cyan/15 blur-[140px]" />
       <div className="grid-floor absolute inset-x-0 top-0 h-[80vh]" />
-      <canvas ref={ref} className="absolute inset-0 h-full w-full" />
+      <canvas ref={ref} className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-1000" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,var(--color-bg)_100%)]" />
     </div>
   );

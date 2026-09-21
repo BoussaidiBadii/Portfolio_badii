@@ -18,6 +18,16 @@
   --animate-spin-slow: spin 14s linear infinite;
   --animate-blink: blink 1s steps(1) infinite;
   --animate-scan: scan 6s linear infinite;
+  --animate-rise: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-pop: pop 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+
+  /* Hero entrance runs in CSS, so it paints before hydration (keeps LCP fast). */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(24px); }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.9); }
+  }
 
   @keyframes marquee {
     to { transform: translateX(-50%); }

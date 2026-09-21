@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { profile } from "@/data/profile";
 
@@ -13,10 +14,12 @@ const links = [
 ];
 
 export function Nav() {
-  const [active, setActive] = useState("home");
+  const onHome = usePathname() === "/";
+  const [active, setActive] = useState(onHome ? "home" : "work");
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    if (!onHome) return;
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
       { rootMargin: "-45% 0px -50% 0px" }
@@ -26,14 +29,14 @@ export function Nav() {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [onHome]);
 
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4">
       <nav className="glass mx-auto flex max-w-5xl items-center justify-between rounded-full px-3 py-2 pl-5">
-        <a href="#home" className="font-mono text-sm tracking-tight">
+        <a href="/" className="font-mono text-sm tracking-tight">
           <span className="text-ember">&lt;</span>
-          badii<span className="text-cyan">.dev</span>
+          badii<span className="text-cyan">.me</span>
           <span className="text-ember"> /&gt;</span>
         </a>
 
@@ -41,7 +44,7 @@ export function Nav() {
           {links.map(({ id, label }) => (
             <li key={id}>
               <a
-                href={`#${id}`}
+                href={`/#${id}`}
                 className={`relative rounded-full px-4 py-2 text-sm transition-colors ${
                   active === id ? "bg-white/10 text-white" : "text-muted hover:text-white"
                 }`}
@@ -77,7 +80,7 @@ export function Nav() {
           {links.map(({ id, label }) => (
             <li key={id}>
               <a
-                href={`#${id}`}
+                href={`/#${id}`}
                 onClick={() => setOpen(false)}
                 className={`block rounded-2xl px-4 py-3 ${active === id ? "bg-white/10 text-white" : "text-muted"}`}
               >

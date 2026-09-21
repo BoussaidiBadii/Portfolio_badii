@@ -96,8 +96,8 @@ export function Contact() {
 export function Footer() {
   return (
     <footer className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 border-t border-line px-5 py-10 font-mono text-xs text-muted sm:flex-row">
-      <p>© {new Date().getFullYear()} {profile.name}. Built with Next.js.</p>
-      <a href="#home" className="transition hover:text-ember">back to top ↑</a>
+      <p>© {new Date().getFullYear()} {profile.name}. </p>
+      <a href="#" className="transition hover:text-ember">back to top ↑</a>
     </footer>
   );
 }
