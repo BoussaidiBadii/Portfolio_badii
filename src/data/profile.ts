@@ -1,3 +1,6 @@
+// Canonical public URL of the portfolio; metadata, sitemap, robots and JSON-LD all derive from it.
+export const siteUrl = "https://badii.me";
+
 export const profile = {
   name: "Boussaidi Badii",
   role: "Software Engineer",

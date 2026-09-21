@@ -1,3 +1,5 @@
+import { siteUrl } from "./profile";
+
 export type Category = "Platforms" | "Food & Hospitality" | "Brands & Studios" | "Legal";
 
 export type Project = {
@@ -162,7 +164,7 @@ export const projects: Project[] = [
     description: "My personal portfolio, rebuilt from a jQuery page into a Next.js app with motion, glassmorphism and a live project index.",
     category: "Platforms",
     tags: ["Next.js", "Tailwind", "Motion"],
-    live: "https://portfolio-badii.vercel.app",
+    live: siteUrl,
     repo: "https://github.com/BoussaidiBadii/Portfolio_badii",
     image: "/projects/portfolio.jpg",
   },
