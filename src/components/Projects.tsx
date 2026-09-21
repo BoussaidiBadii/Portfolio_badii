@@ -46,10 +46,10 @@ function ProjectCard({ project, index, caseHref }: { project: Project; index: nu
       >
         <a
           href={caseHref ?? project.live}
-          {...(caseHref ? { "aria-label": `${project.name} case study` } : { target: "_blank", rel: "noopener noreferrer" })}
+          {...(caseHref ? {} : { target: "_blank", rel: "noopener noreferrer" })}
           className={`relative block overflow-hidden border-b border-line ${project.featured ? "aspect-[16/8]" : "aspect-[16/10]"}`}
         >
-          <div className="absolute inset-x-0 top-0 z-10 flex items-center gap-1.5 bg-black/60 px-3 py-2 backdrop-blur">
+          <div aria-hidden className="absolute inset-x-0 top-0 z-10 flex items-center gap-1.5 bg-black/60 px-3 py-2 backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-[#ff5f57]" />
             <span className="h-2 w-2 rounded-full bg-[#febc2e]" />
             <span className="h-2 w-2 rounded-full bg-[#28c840]" />
@@ -57,14 +57,14 @@ function ProjectCard({ project, index, caseHref }: { project: Project; index: nu
           </div>
           <Image
             src={project.image}
-            alt={`${project.name} website screenshot`}
+            alt={caseHref ? `${project.name} case study` : `${project.name} website screenshot`}
             fill
             sizes={project.featured ? "(min-width: 768px) 66vw, 100vw" : "(min-width: 768px) 33vw, 100vw"}
             className="object-cover object-top transition duration-700 group-hover:scale-[1.04]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg/80 via-transparent to-transparent" />
           {project.featured && (
-            <span className="absolute bottom-4 left-4 rounded-full bg-ember px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-wider text-black">
+            <span aria-hidden className="absolute bottom-4 left-4 rounded-full bg-ember px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-wider text-black">
               Featured
             </span>
           )}
