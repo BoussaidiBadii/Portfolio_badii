@@ -155,4 +155,40 @@ export const projects: Project[] = [
     image: "/projects/avocat.jpg",
     rtl: true,
   },
+  {
+    slug: "trangis",
+    name: "TRANGIS",
+    tagline: "Graffiti artist & calligrapher in Tunis",
+    description:
+      "Portfolio and shop for a Tunisian street artist who blends Arabic calligraphy with contemporary graffiti, covering murals, canvases and custom commissions.",
+    category: "Brands & Studios",
+    tags: ["Next.js", "Art", "Portfolio"],
+    live: "https://trangis.vercel.app",
+    repo: "https://github.com/BoussaidiBadii/trangis",
+    image: "/projects/trangis.jpg",
+  },
+  {
+    slug: "mhgym",
+    name: "MH Gym Center",
+    tagline: "1,200 m² fitness center in Manouba",
+    description:
+      "A bold, dark website for a gym with 140+ machines, 28+ disciplines, 17 coaches, HYROX programs and a weekly class schedule.",
+    category: "Brands & Studios",
+    tags: ["Next.js", "Fitness", "Landing page"],
+    live: "https://mhgymcenter.vercel.app",
+    repo: "https://github.com/BoussaidiBadii/mhgymcenter",
+    image: "/projects/mhgym.jpg",
+  },
+  {
+    slug: "af",
+    name: "AF Bodybuilding Center",
+    tagline: "Bodybuilding gym in Cebalat Ben Ammar, Tunis",
+    description:
+      "Website for a gym with guided weightlifting, cycling, HIIT and boxing classes, a weekly schedule, coach profiles, a gallery and membership plans.",
+    category: "Brands & Studios",
+    tags: ["Next.js", "Fitness", "Schedule"],
+    live: "https://af-gym-center.vercel.app",
+    repo: "https://github.com/BoussaidiBadii/af-gym-center",
+    image: "/projects/af.jpg",
+  },
 ];

@@ -239,4 +239,57 @@ export const caseStudies: Record<string, CaseStudy> = {
     sections: ["Profile", "Practice areas", "Career", "Gallery", "Blog", "Contact"],
     integrations: ["Google Maps"],
   },
+
+  trangis: {
+    type: "Artist portfolio & shop",
+    language: "French & English",
+    overview: [
+      "TRANGIS is a Tunisian graffiti artist and calligrapher based in Tunis. The site presents his work, which blends Arabic calligraphy with contemporary graffiti, as monumental murals and original canvases.",
+      "It is built to win commissions from cafés, hotels and institutions in Tunisia and abroad, with a clear call to order a mural and a shop for merchandise.",
+    ],
+    features: [
+      { title: "Graffiti-style hero", body: "A hand-lettered logo and the tagline \"Du mur à la toile\" set the tone on a dark, textured background." },
+      { title: "Murals and canvases", body: "Wall murals for interior and exterior spaces, plus original paintings on canvas." },
+      { title: "Custom commissions", body: "A direct \"Commander une fresque\" call to action for brands and institutions." },
+      { title: "Merchandise shop", body: "A shop section offering the artist's merchandise." },
+      { title: "Bilingual FR / EN", body: "Content available in French and English." },
+    ],
+    sections: ["Hero", "Walls", "Canvases", "Commissions", "Shop", "Contact"],
+  },
+
+  mhgym: {
+    type: "Fitness center website",
+    language: "French",
+    overview: [
+      "MH GYM CENTER UNDERGROUND is a 1,200 m² fitness center in Manouba, Tunisia, with more than 140 REALLEADER USA machines and the line \"Pas un mètre de trop\".",
+      "The site is a dark, immersive one-pager that walks visitors through the facility, the disciplines, the coaches and the weekly class schedule.",
+    ],
+    features: [
+      { title: "Immersive hero", body: "A full-screen video-style hero of the gym floor with numbered section navigation." },
+      { title: "28+ disciplines", body: "Collective classes including BodyPump, CrossTraining, Pilates, Boxe and Kangoo Jumps." },
+      { title: "Weekly schedule", body: "A structured timetable of the collective classes." },
+      { title: "17 certified coaches", body: "The coaching team is presented to build trust." },
+      { title: "HYROX programs", body: "Dedicated training programs for HYROX competition." },
+      { title: "Kids' classes", body: "Kick Boxing, Taekwondo and Gymnastics for children." },
+    ],
+    sections: ["Facility", "Disciplines", "Schedule", "Coaches", "HYROX", "Kids", "Contact"],
+  },
+
+  af: {
+    type: "Fitness center website",
+    language: "French",
+    overview: [
+      "AF Bodybuilding Center is a gym on Avenue du Romarin in Cebalat Ben Ammar, Tunis, with a weightlifting platform, cardio area, boxing space and guided machines.",
+      "The site presents the classes, the four coaches, a weekly schedule and the membership plans, backed by a 4.6/5 Google rating from 198 reviews.",
+    ],
+    features: [
+      { title: "Classes for every goal", body: "Guided weightlifting, indoor cycling, HIIT, boxing fitness, free weights workshop, circuit cardio and stretching & mobility." },
+      { title: "Weekly schedule", body: "A class timetable with availability tracking." },
+      { title: "Coach profiles", body: "Four coaches presented with their specialties, from weightlifting to boxing." },
+      { title: "Membership plans", body: "Monthly, quarterly, six-month and annual options." },
+      { title: "Gallery & reviews", body: "Photos of the equipment and spaces, plus member testimonials." },
+      { title: "Contact form & location", body: "A contact form with the address and directions." },
+    ],
+    sections: ["Why AF", "Classes", "Schedule", "Coaches", "Gallery", "Reviews", "Memberships", "Contact"],
+  },
 };
